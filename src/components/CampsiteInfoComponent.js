@@ -143,20 +143,25 @@ function RenderComments({ comments, addComment, campsiteId }) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments</h4>
-        {comments.map((comment) => (
-          <p>
-            <div>
-              {comment.text}
-              <br />
-              --{comment.author}
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-              }).format(new Date(Date.parse(comment.date)))}
-            </div>
-          </p>
-        ))}
+        {comments.map((comment) => {
+          {
+            console.log(comment, "this is test");
+          }
+          return (
+            <p>
+              <div>
+                {comment.text}
+                <br />
+                --{comment.author}
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "2-digit",
+                }).format(new Date(Date.parse(comment.date)))}
+              </div>
+            </p>
+          );
+        })}
         <CommentForm campsiteId={campsiteId} addComment={addComment} />
       </div>
     );
