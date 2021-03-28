@@ -8,13 +8,13 @@ import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { actions } from "react-redux-form";
 import {
   postComment,
   fetchCampsites,
   fetchComments,
   fetchPromotions,
 } from "../redux/ActionCreators";
-import { actions } from "react-redux-form";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const mapStateToProps = (state) => {
@@ -41,6 +41,7 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromotions();
   }
+
   render() {
     const HomePage = () => {
       return (
@@ -78,7 +79,7 @@ class Main extends Component {
             (comment) => comment.campsiteId === +match.params.campsiteId
           )}
           commentsErrMess={this.props.comments.errMess}
-          postComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };
@@ -116,7 +117,6 @@ class Main extends Component {
             </Switch>
           </CSSTransition>
         </TransitionGroup>
-
         <Footer />
       </div>
     );
