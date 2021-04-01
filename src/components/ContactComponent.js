@@ -8,7 +8,7 @@ import {
   Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, Form, Errors } from "react-redux-form";
+import { Control, Form, Errors, actions } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -36,13 +36,17 @@ class Contact extends Component {
         email: false,
       },
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(values) {
-    console.log("Current state is: " + JSON.stringify(values));
-    alert("Current state is: " + JSON.stringify(values));
-    this.props.resetFeedbackForm();
+    this.props.postFeedback(values);
+    //console.log('Current State is: ' + JSON.stringify(values));
+    //alert('Thank you for your feedback! \r\n\r\n You Submitted: ' + JSON.stringify(values));
+    //this.props.resetFeedbackForm();
   }
+
   render() {
     return (
       <div className="container">
@@ -63,7 +67,7 @@ class Contact extends Component {
           <div className="col-sm-4">
             <h5>Our Address</h5>
             <address>
-              1 Nucamp Way
+              12 Nucamp Way
               <br />
               Seattle, WA 98001
               <br />
@@ -72,7 +76,7 @@ class Contact extends Component {
           </div>
           <div className="col">
             <a role="button" className="btn btn-link" href="tel:+12065551234">
-              <i className="fa fa-phone" /> 1-206-555-1234
+              <i className="fa fa-phone"></i> 1-206-555-1234
             </a>
             <br />
             <a
@@ -80,7 +84,7 @@ class Contact extends Component {
               className="btn btn-link"
               href="mailto:fakeemail@fakeemail.co"
             >
-              <i className="fa fa-envelope-o" /> campsites@nucamp.co
+              <i className="fa fa-envelope-o"></i> campsites@nucamp.co
             </a>
           </div>
         </div>
@@ -179,7 +183,7 @@ class Contact extends Component {
                     component="div"
                     messages={{
                       required: "Required",
-                      minLength: "Must be at least 10 numbers",
+                      minLength: "Must be at least 10 characters",
                       maxLength: "Must be 15 numbers or less",
                       isNumber: "Must be a number",
                     }}

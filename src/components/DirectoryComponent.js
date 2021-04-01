@@ -27,7 +27,6 @@ function RenderDirectoryItem({ campsite }) {
     </Card>
   );
 }
-
 function Directory(props) {
   const directory = props.campsites.campsites.map((campsite) => {
     return (
@@ -36,7 +35,6 @@ function Directory(props) {
       </div>
     );
   });
-
   if (props.campsites.isLoading) {
     return (
       <div className="container">
@@ -50,7 +48,9 @@ function Directory(props) {
     return (
       <div className="container">
         <div className="row">
-          <h4>{props.campsites.errMess}</h4>
+          <div className="col">
+            <h4>{props.campsites.errMess}</h4>
+          </div>
         </div>
       </div>
     );
